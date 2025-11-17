@@ -15,6 +15,9 @@ const flash = require('connect-flash');
 
 const route = require('./routes');
 const path = require('path');
+const helmet = require('helmet');
+const csrf = require('csurf');
+
 const {middlewareModelo} = require('./src/middlewares/middleware')
 
 app.use(express.urlencoded({extended: true}));
@@ -40,6 +43,7 @@ app.set('views', path.resolve(__dirname, 'src', 'views'));
 app.set('view engine', 'ejs');
 
 app.use(middlewareModelo);
+
 app.use(route);
 
 app.on('pronto', () => {
