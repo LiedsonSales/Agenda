@@ -1,7 +1,8 @@
 const express = require('express');
 const route = express.Router();
-const homeController = require('./src/controllers/homeController');
+const {initialPage, enviaFormulário} = require('./src/controllers/homeController');
 
-route.get('/', homeController.initialPage);
+route.get('/', initialPage);
+route.post('/', enviaFormulário);
 
 module.exports = route
