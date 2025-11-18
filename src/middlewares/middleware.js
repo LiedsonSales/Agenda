@@ -5,9 +5,11 @@ exports.middlewareModelo = (request, response, next) => {
 }
 
 exports.checkCsrfError = (error, request, response, next) => {
-    if (error && 'EBADCSRFTOKEN' == error.code) {
+    if (error) {
         return response.send('404');
     }
+
+    next()
 }
 
 exports.csrfMiddleware = (request, response, next) => {

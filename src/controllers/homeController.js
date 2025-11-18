@@ -1,7 +1,3 @@
-exports.initialPage = (req, res) => {
+exports.index = (req, res) => {
     res.render('index');
-}
-
-exports.enviaFormulário = (req, res) => {
-    res.send(req.body.cliente)
 }

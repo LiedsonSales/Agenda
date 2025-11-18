@@ -1,8 +1,12 @@
 const express = require('express');
 const route = express.Router();
-const {initialPage, enviaFormulário} = require('./src/controllers/homeController');
+const homeController = require('./src/controllers/homeController');
+const loginController = require('./src/controllers/loginController');
 
-route.get('/', initialPage);
-route.post('/', enviaFormulário);
+// rotas da home
+route.get('/', homeController.index);
+
+//rotas de login
+route.get('/login/index', loginController.login);
 
 module.exports = route
