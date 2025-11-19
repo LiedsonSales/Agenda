@@ -1,15 +1,14 @@
 exports.middlewareModelo = (request, response, next) => {
-    console.log('middleware modelo funcionando...');
-    console.log(request.body)
     next();
 }
 
 exports.checkCsrfError = (error, request, response, next) => {
+    console.log(error)
     if (error) {
-        return response.send('404');
+        return response.render('404');
     }
 
-    next()
+    next();
 }
 
 exports.csrfMiddleware = (request, response, next) => {

@@ -18,8 +18,9 @@ const path = require('path');
 const helmet = require('helmet');
 const csrf = require('csurf');
 
-const {middlewareModelo} = require('./src/middlewares/middleware')
+const {middlewareModelo, checkCsrfError, csrfMiddleware} = require('./src/middlewares/middleware');
 
+app.use(helmet());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.resolve(__dirname, 'public')));
 
@@ -42,8 +43,11 @@ app.use(flash());
 app.set('views', path.resolve(__dirname, 'src', 'views'));
 app.set('view engine', 'ejs');
 
-app.use(middlewareModelo);
+app.use(csrf());
 
+app.use(middlewareModelo);
+app.use(checkCsrfError);
+app.use(csrfMiddleware);
 
 app.use(route);
 

@@ -7,6 +7,6 @@ const loginController = require('./src/controllers/loginController');
 route.get('/', homeController.index);
 
 //rotas de login
-route.get('/login/index', loginController.login);
+route.get('/login/index', loginController.index);
 
 module.exports = route

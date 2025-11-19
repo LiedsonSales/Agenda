@@ -1,3 +1,3 @@
-exports.login = (req, res) => {
+exports.index = (req, res) => {
     res.render('login');
 }
