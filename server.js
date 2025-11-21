@@ -20,16 +20,18 @@ const csrf = require('csurf');
 
 const {middlewareModelo, checkCsrfError, csrfMiddleware} = require('./src/middlewares/middleware');
 
-app.use(helmet());
+app.use(
+    helmet({
+        hsts: false,
+    })
+);
 app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 app.use(express.static(path.resolve(__dirname, 'public')));
 
 const sessionOptions = session({
     secret: 'dhjak shkd',
-    store: new MongoStore({
-        mongooseConnection: mongoose.connection,
-        mongoUrl: process.env.CONNECTIONSTRING
-    }),
+    store: MongoStore.create({mongoUrl: process.env.CONNECTIONSTRING}),
     resave: false,
     saveUninitialized: false,
     cookie: {
