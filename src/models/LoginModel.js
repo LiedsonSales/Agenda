@@ -11,22 +11,29 @@ const LoginModel = mongoose.model('Login 05', LoginSchema);
 class Login {
     constructor(body) {
         this.body = body;
-        this.erros = [];
+        this.errors = [];
         this.user = null;
     };
 
-    register() {
+    async register() {
         this.valida();
+        if(this.errors.length > 0) return;
+        
+        try {
+            this.user = await LoginModel.create(this.body);
+        } catch(e) {
+            console.log(e);
+        }
     }
 
     valida() {
         this.cleanUp();
         // Validação
         // O email precisa ser válido
-        if (!validator.isEmail(this.body.email)) this.erros.push('E-mail inválido'); 
+        if (!validator.isEmail(this.body.email)) this.errors.push('E-mail inválido'); 
         // A senha precisa ter entre 0 e 3
-        if (this.body.password.lenght < 3 || this.body.password.lenght > 50) {
-            this.erros.push('A senha precisa ter entre 3 e 50 caracteres');
+        if (this.body.password.length < 3 || this.body.password.length > 50) {
+            this.errors.push('A senha precisa ter entre 3 e 50 caracteres');
         }
     }
 
