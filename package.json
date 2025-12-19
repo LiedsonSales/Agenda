@@ -23,6 +23,7 @@
     "express": "^5.1.0",
     "express-session": "^1.18.2",
     "helmet": "^8.1.0",
+    "jquery": "^3.7.1",
     "mongoose": "^8.20.0",
     "regenerator-runtime": "^0.14.1",
     "style-loader": "^4.0.0",

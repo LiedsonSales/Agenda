@@ -1,3 +1,4 @@
+const { render } = require('ejs');
 const Contato = require('../models/contatoModel');
 
 exports.contato = (req, res) => {
@@ -13,7 +14,6 @@ exports.register = async (req, res) => {
 
         // verifica se o formulário foi preenchido corretamente e mostra na tela o que precisa ser feito
         if(contato.errors.length > 0) {
-            console.log(contato.errors);
             req.flash('errors', contato.errors);
             req.session.save(() => res.redirect('/contato/index'));
             return
@@ -58,4 +58,15 @@ exports.edit = async (req, res) => {
         return res.render('404');
     }
     
+}
+
+exports.delete = async (req, res) => {
+    if(!req.params.id) return render('404');
+
+    const contato = await Contato.delete(req.params.id);
+    if(!contato) return render('404');
+
+    req.flash('success', 'Contato deletado com sucesso.');
+    req.session.save(() => res.redirect('/'));
+    return
 }
